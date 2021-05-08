@@ -9,13 +9,20 @@ jobs:
         include:
           - runner: windows-2019
             ninjaInstall: choco install ninja
+            libExt: .dll
           - runner: macos-11.0
             ninjaInstall: brew install ninja
+            libExt: .dylib
           - runner: ubuntu-20.04
-            ninjaInstall: apt-get update -y && apt-get install -y ninja-build
+            ninjaInstall: sudo apt-get update -y && sudo apt-get install -y ninja-build
+            libExt: .lib
     runs-on: ${{matrix.runner}}
     steps:
       - uses: actions/checkout@v2
       - run: ${{matrix.ninjaInstall}}
       - run: cmake -DCMAKE_BUILD_TYPE=Release -G Ninja
       - run: ninja
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{matrix.runner}} Artifacts
+          path: *.${{matrix.libExt}}
