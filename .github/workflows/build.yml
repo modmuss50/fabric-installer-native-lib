@@ -25,4 +25,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: ${{matrix.runner}} Artifacts
-          path: {{matrix.artifact}}
+          path: ${{matrix.artifact}}
