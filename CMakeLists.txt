@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.17)
 project(fabric_installer_native_lib)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_BUILD_TYPE Release)
 
 set(NATIVE_SOURCE linux.cpp) # The source file to be build against the header
 set(NATIVE_JNI linux) # The platform specific JNI sub directory
@@ -13,7 +12,7 @@ IF(APPLE)
     SET(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "Build architectures for Mac OS X" FORCE)
 ELSEIF (WIN32)
     set(NATIVE_SOURCE windows.cpp)
-    set(NATIVE_JNI windows)
+    set(NATIVE_JNI win32)
 ENDIF()
 
 message(STATUS "JAVA_HOME= $ENV{JAVA_HOME}")

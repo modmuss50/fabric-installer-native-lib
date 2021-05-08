@@ -7,3 +7,6 @@
 !/*.mm
 
 !/LICENSE
+
+!/.gitignore
+!/.github
