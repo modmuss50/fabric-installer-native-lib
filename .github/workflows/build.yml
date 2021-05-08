@@ -9,13 +9,13 @@ jobs:
         include:
           - runner: windows-2019
             ninjaInstall: choco install ninja
-            libExt: .dll
+            artifact: "*.dll"
           - runner: macos-11.0
             ninjaInstall: brew install ninja
-            libExt: .dylib
+            artifact: "*.dylib"
           - runner: ubuntu-20.04
             ninjaInstall: sudo apt-get update -y && sudo apt-get install -y ninja-build
-            libExt: .lib
+            artifact: "*.lib"
     runs-on: ${{matrix.runner}}
     steps:
       - uses: actions/checkout@v2
@@ -25,4 +25,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: ${{matrix.runner}} Artifacts
-          path: *.${{matrix.libExt}}
+          path: {{matrix.artifact}}
