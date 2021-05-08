@@ -8,18 +8,15 @@ jobs:
         runner: [windows-2019, macos-11.0, ubuntu-20.04]
         include:
           - runner: windows-2019
-            ninjaInstall: choco install ninja
             artifact: "*.dll"
           - runner: macos-11.0
-            ninjaInstall: brew install ninja
             artifact: "*.dylib"
           - runner: ubuntu-20.04
-            ninjaInstall: sudo apt-get update -y && sudo apt-get install -y ninja-build
-            artifact: "*.lib"
+            artifact: "*.so"
     runs-on: ${{matrix.runner}}
     steps:
       - uses: actions/checkout@v2
-      - run: ${{matrix.ninjaInstall}}
+      - uses: seanmiddleditch/gha-setup-ninja@v3
       - run: cmake -DCMAKE_BUILD_TYPE=Release -G Ninja
       - run: ninja
       - uses: actions/upload-artifact@v2
