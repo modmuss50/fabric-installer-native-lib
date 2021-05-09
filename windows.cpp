@@ -4,7 +4,7 @@
 
 constexpr LPCSTR MinecraftLauncherMutexName = "MojangLauncher";
 
-jboolean Java_net_fabricmc_installer_launcher_MojangLauncherHelper_isMojangLauncherOpen(JNIEnv *, jclass) {
+JNIEXPORT jboolean JNICALL Java_net_fabricmc_installer_launcher_MojangLauncherHelper_isMojangLauncherOpen(JNIEnv *, jclass) {
     HANDLE handle = CreateMutexA(nullptr, false, MinecraftLauncherMutexName);
 
     if (GetLastError() == ERROR_ALREADY_EXISTS)

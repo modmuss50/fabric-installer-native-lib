@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: microsoft/setup-msbuild@v1.0.2
-      - run: cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 16 2019" -A ${{matrix.arch}}
+      - run: cmake -G "Visual Studio 16 2019" -A ${{matrix.arch}}
       - run: msbuild fabric_installer_native_lib.sln /property:Configuration=Release
       - uses: actions/upload-artifact@v2
         with:
